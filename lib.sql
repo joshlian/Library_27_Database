@@ -1,0 +1,15 @@
+CREATE TABLE BOOK (book_id INT NOT NULL, title VARCHAR(40) NOT NULL, book_author VARCHAR(30) NOT NULL, PRIMARY KEY (book_id));
+
+CREATE TABLE BOOK_AUTHORS (book_id INT NOT NULL, publisher_name VARCHAR(40) NOT NULL, PRIMARY KEY (book_id), FOREIGN KEY (publisher_name) REFERENCES PUBLISHER (publisher_name));
+
+CREATE TABLE LIBRARY_BRANCH (branch_id INT NOT NULL, branch_name VARCHAR(15) NOT NULL, branch_address VARCHAR(100) NOT NULL, PRIMARY KEY (branch_id));
+
+CREATE TABLE BORROWERS (card_no INT NOT NULL, name VARCHAR (30) NOT NULL, address VARCHAR(100) NOT NULL, phone CHAR(12) NOT NULL, PRIMARY KEY (card_no));
+
+CREATE TABLE PUBLISHER (publisher_name VARCHAR(40) NOT NULL, phone CHAR(12) NOT NULL, address VARCHAR(100) NOT NULL, PRIMARY KEY(publisher_name));
+
+
+CREATE TABLE BOOK_COPIES (book_id INT NOT NULL, branch_id INT NOT NULL, num_of_copies INT, PRIMARY KEY (book_id), FOREIGN KEY(book_id) REFERENCES BOOK(book_id), FOREIGN KEY(branch_id) REFERENCES LIBRARY_BRANCH(branch_id));
+
+
+CREATE TABLE BOOK_LOANS (book_id INT NOT NULL, branch_id INT NOT NULL, card_no INT NOT NULL, date_out DATE NOT NULL, due_date DATE NOT NULL, PRIMARY KEY (book_id, card_no), FOREIGN KEY (book_id) REFERENCES BOOK(book_id), FOREIGN KEY (card_no) REFERENCES BORROWERS (card_no), FOREIGN KEY (branch_id) REFERENCES LIBRARY_BRANCH (branch_id));
