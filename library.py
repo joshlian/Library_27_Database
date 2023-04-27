@@ -11,7 +11,10 @@ root.geometry("550x500")
 
 
 def option_one():
-	print("one")
+	option1 = Tk()
+	option1.title('First Option')
+	option1.geometry("200x200")
+	option1.mainloop()
 
 def option_two():
 	print("two")
@@ -27,6 +30,7 @@ def option_five():
 
 def option_six():
 	print("six")
+
 
 
 #Tell users what they can do
@@ -100,6 +104,8 @@ name3 = Label(root, text = 'Abhinav Shrestha')
 name3.grid(row = 19, column =1)
 
 
+
+
 #lables before the entry explanation
 opt1 = Label(root, text = 'OPTION 1')
 opt1.grid(row = 2, column =0)
@@ -118,6 +124,7 @@ opt5.grid(row = 10, column =0)
 
 opt6 = Label(root, text = 'OPTION 6')
 opt6.grid(row = 12, column =0)
+
 
 
 
