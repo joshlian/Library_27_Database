@@ -5,19 +5,19 @@ def option6A():
 	option6A.geometry("600x700")
 
 	def searchName():
-		submit_conn = sqlite3.connect('library.db’')
+		submit_conn = sqlite3.connect('library.db')
 		submit_cur = submit_conn.cursor()
-		submit_cur.execute("select card_no, Borrower_name, Total_Late_Fee_Balance from vBookLoanInfo where name = %:name%;"  ,
+		submit_cur.execute("select Borrower_name, card_no, Total_Late_Fee_Balance FROM vBookLoanInfo WHERE Borrower_name LIKE :%name%" ,
 		{
 			'name': name.get(),
 
 		})
 		getRecords = submit_conn.fetchall()
-		print_record = ("Card_no    |  Borrower_Name     | Total_Late_Fee_Balance" + "\n")
-		for  evsky in getRecords:
-				print_record += (str(evsky[0]) + "       "  + str(evsky[1]) + "      $" str(evsky[2]) + "\n")
+		print_record = ("                  Borrower_name         |       Card_no      | Total_Late_Fee_Balance" + "\n")
+		for evsky in getRecords:
+			print_record += str((evsky[0]) +"                      " + str(evsky[1]) + "                   $"+ str(evsky[2]) + "\n")
 		printFinal = Label(option6A, text = print_record)
-		printFinal.grid(row = 7, column = 1, columnspan = 3)
+		printFinal.grid(row = 7, column = 0, columnspan = 3)
 		submit_conn.close()
                                     
 
