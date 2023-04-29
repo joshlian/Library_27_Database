@@ -22,27 +22,35 @@ def option6A():
                                     
 
 
-
 	def searchID():
 		IDsearch_conn = sqlite3.connect('library.db')
 	
 		submit_cur = IDsearch_conn.cursor()
-		submit_cur.execute("select card_no, Borrower_name, Total_Late_Fee_Balance from vBookLoanInfo where card_no = :card_no;"  ,
+		submit_cur.execute("select Borrower_name, card_no, Total_Late_Fee_Balance from vBookLoanInfo where card_no = :card_no" ,
 		{
 			'card_no':ID.get(),
 
 		})
-		getRecords = IDsearch_conn.fetchall()
-		print_record = ("Card_no    |  Borrower_Name     | Total_Late_Fee_Balance" + "\n")
-		for  evsky in getRecords:
-			print_record+= (str(evsky[0]) + "        "  + str(evsky[1]) + "      $" + str(evsky[2]) + "\n")
-			printFinal = Label(option6A, text = print_record)
-			printFinal.grid(row = 7, column = 1, columnspan = 3)
-			IDsearch_conn.close()
+		getRecords = submit_cur.fetchall()
+		print_record = ("                  Borrower_name         |       Card_no      | Total_Late_Fee_Balance" + "\n")
+		for evsky in getRecords:
+			print_record += str((evsky[0]) +"                      " + str(evsky[1]) + "                   $"+ str(evsky[2]) + "\n")
+		printFinal = Label(option6A, text = print_record)
+		printFinal.grid(row = 7, column = 0, columnspan = 3)
+		IDsearch_conn.close()
 
 
-#Def search_everyhting():
-	#Everyhting_conn = sqlite3.connection
+	def search_everything():
+		everything_conn = sqlite3.connect('library.db')
+		everything_curr = everything_conn.cursor()
+		everything_curr.execute("SELECT Borrower_name, card_no, Total_late_Fee_Balance FROM vBookLoanInfo ORDER BY Total_Late_Fee_Balance")
+		everything = everything_curr.fetchall()
+		Print_things = ("                  Borrower_name         |       Card_no      | Total_Late_Fee_Balance" + "\n")
+		for things in everything:
+			Print_things += str((things[0]) +"                      " + str(things[1]) + "                   $"+ str(things[2]) + "\n")
+		Printing = Label(option6A, text = Print_things)
+		Printing.grid(row =7, column = 0, columnspan =3)
+		everything_conn.close()
 
 
 	Instruct = Label(option6A, text = "Enter a name or an ID or hit Search All")
@@ -73,5 +81,5 @@ def option6A():
 	Button(option6A,text="Search Name",command= searchName).grid(row = 1, column =2)
 	Button(option6A,text="Search ID",command= searchID).grid(row = 3, column =  2)
 	Button(option6A,text="Search All",command= search_everything).grid(row = 5, column =  1)
-
-	print("six")
+	space = Label(option6A, text ="")
+	space.grid(row = 6, column =1)
