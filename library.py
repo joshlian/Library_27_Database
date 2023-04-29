@@ -10,6 +10,7 @@ root.geometry("530x510")
 
 def option_one():
 	print("one")
+	
 def option_two():
 	print("two")
 
@@ -17,54 +18,16 @@ def option_three():
 	print("three")
 
 def option_four():
-
-	option4 = Tk()
-	option4.title('List number of copies')
-	option4.geometry("450x400")
-
-	def print_copy():
-		space = Label(option4, text ="")
-		space.grid(row = 5, column =1)
-
-		conn4 = sqlite3.connect('library.db')
-		conn4_curr = conn4.cursor()
-		conn4_curr.execute("SELECT branch_id, num_of_copies FROM BOOK_COPIES NATURAL JOIN BOOK WHERE title = ? GROUP BY branch_id",(book.get(),))
-		getall = conn4_curr.fetchall()
-		print_record = ('branch_ID    Copies'+"\n")
-		for pall in getall:
-			print_record += (str(pall[0]) + "               " + str(pall[1]) + "\n")
-		printIT = Label(option4, text = print_record)
-		printIT.grid(row = 6 , column = 1, columnspan = 2)
-
-		conn4.close()
-	space = Label(option4, text ="Type the book title you want to find out about")
-	space.grid(row = 0, column =1, padx = 10)
-
-	space = Label(option4, text ="")
-	space.grid(row = 1, column =1)
-
-	book = Entry(option4, width = 40)
-	book.grid(row = 2, column =1)
-
-	booktitle = Label(option4, text ="Book Title")
-	booktitle.grid(row = 2, column =0)
-
-	space = Label(option4, text ="")
-	space.grid(row = 3, column =1)
-
-	Button(option4,text = "Look up book count", command = print_copy).grid(row = 4, column =1)
-	option4.mainloop()
+	print("four")
 
 def option_five():
 	print("five")
 
 def option_sixA():
-	option6 = Tk()
-	option6.title('List number of copies')
-	option6.geometry("600x700")
-	option6.mainloop()
+	print("six A")
+
 def option_sixB():
-    print("hi")
+    	print("six B")
     
 
 
