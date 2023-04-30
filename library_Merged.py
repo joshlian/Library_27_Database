@@ -113,6 +113,7 @@ def option_two():
 	option_conn.commit()
 	#close the DB connection
 	option_conn.close()
+	option2.mainloop()
 
 def option_three():
 	def option_three_submit():
@@ -185,6 +186,7 @@ def option_three():
 
 	option_conn.commit()
 	option_conn.close()
+	option3.mainloop()
 
 
 def option_four():
