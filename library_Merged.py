@@ -4,7 +4,7 @@ import sqlite3
 
 root = Tk()
 
-root.title('USER_OPTIONS')
+root.title('Library Management System')
 root.geometry("530x510")
 
 def option_one():
@@ -277,7 +277,7 @@ def option_five():
 		date_to = dateto.get()
 
 		#Execute the sqlite command here
-		search_cur.execute("SELECT book_id, branch_id, card_no, date_out, due_date, returned_date, (JULIANDAY(returned_date)- JULIANDAY(due_date)) AS Days_late FROM BOOK_LOANS WHERE returned_date > due_date AND (returned_date > ? AND returned_date < ?)", (date_from, date_to))
+		search_cur.execute("SELECT book_id, branch_id, card_no, date_out, due_date, returned_date, (JULIANDAY(returned_date)- JULIANDAY(due_date)) AS Days_late FROM BOOK_LOANS WHERE returned_date > due_date AND (returned_date >= ? AND returned_date <= ?)", (date_from, date_to))
 
 
 		search_records = search_cur.fetchall()
@@ -292,14 +292,13 @@ def option_five():
     
 		search_label = Label(option5, text = print_record)
 		search_label.grid(row = 7, column = 1, padx = 10, pady= 10)
+		#commit changes
+		search_conn.commit()
+		search_conn.close()
     
 	#Creating a button for searching late books within the entered date range
 	search_btn = Button (option5, text = "Search", command = Search)
 	search_btn.grid (row = 4, column = 0, columnspan = 2, padx = 10, pady = 10)
-
-	#commit changes
-	search_conn.commit()
-	search_conn.close()
 
 	option5.mainloop()
 
