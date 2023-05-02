@@ -277,7 +277,7 @@ def option_five():
 		date_to = dateto.get()
 
 		#Execute the sqlite command here
-		search_cur.execute("SELECT book_id, branch_id, card_no, date_out, due_date, returned_date, (JULIANDAY(returned_date)- JULIANDAY(due_date)) AS Days_late FROM BOOK_LOANS WHERE returned_date > due_date AND (returned_date >= ? AND returned_date <= ?)", (date_from, date_to))
+		search_cur.execute("SELECT book_id, branch_id, card_no, date_out, due_date, returned_date, (JULIANDAY(returned_date)- JULIANDAY(due_date)) AS Days_late FROM BOOK_LOANS WHERE returned_date > due_date AND (due_date >= ? AND due_date <= ?)", (date_from, date_to))
 
 
 		search_records = search_cur.fetchall()
